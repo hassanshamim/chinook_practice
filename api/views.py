@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-# Create your views here.
+from . import models
+from . import serializers
+
+
+class AlbumList(ListCreateAPIView):
+    serializer_class = serializers.AlbumSerializer
+    queryset = models.Album.objects.all()
+
+class AlbumDetail(RetrieveUpdateDestroyAPIView):
+    serializer_class = serializers.AlbumSerializer
+    queryset = models.Album.objects.all()
