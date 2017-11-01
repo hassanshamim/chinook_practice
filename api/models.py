@@ -10,26 +10,35 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-class Albums(models.Model):
-    albumid = models.IntegerField(db_column='AlbumId')  # Field name made lowercase.
+class Album(models.Model):
+    id = models.AutoField(db_column='AlbumId', primary_key=True)  # Field name made lowercase.
     title = models.TextField(db_column='Title')  # Field name made lowercase. This field type is a guess.
-    artistid = models.IntegerField(db_column='ArtistId')  # Field name made lowercase.
+    artist = models.ForeignKey('Artist',
+        db_column='ArtistId',
+        related_name='albums',
+    )
 
     class Meta:
         managed = False
         db_table = 'albums'
 
+    def __str__(self):
+        return self.title
 
-class Artists(models.Model):
-    artistid = models.IntegerField(db_column='ArtistId')  # Field name made lowercase.
+
+class Artist(models.Model):
+    id = models.AutoField(db_column='ArtistId', primary_key=True)  # Field name made lowercase.
     name = models.TextField(db_column='Name', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
 
     class Meta:
         managed = False
         db_table = 'artists'
 
+    def __str__(self):
+        return self.name
 
-class Customers(models.Model):
+
+class Customer(models.Model):
     customerid = models.IntegerField(db_column='CustomerId')  # Field name made lowercase.
     firstname = models.TextField(db_column='FirstName')  # Field name made lowercase. This field type is a guess.
     lastname = models.TextField(db_column='LastName')  # Field name made lowercase. This field type is a guess.
@@ -49,7 +58,7 @@ class Customers(models.Model):
         db_table = 'customers'
 
 
-class Employees(models.Model):
+class Employee(models.Model):
     employeeid = models.IntegerField(db_column='EmployeeId')  # Field name made lowercase.
     lastname = models.TextField(db_column='LastName')  # Field name made lowercase. This field type is a guess.
     firstname = models.TextField(db_column='FirstName')  # Field name made lowercase. This field type is a guess.
@@ -71,7 +80,7 @@ class Employees(models.Model):
         db_table = 'employees'
 
 
-class Genres(models.Model):
+class Genre(models.Model):
     genreid = models.IntegerField(db_column='GenreId')  # Field name made lowercase.
     name = models.TextField(db_column='Name', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
 
@@ -80,7 +89,7 @@ class Genres(models.Model):
         db_table = 'genres'
 
 
-class InvoiceItems(models.Model):
+class InvoiceItem(models.Model):
     invoicelineid = models.IntegerField(db_column='InvoiceLineId')  # Field name made lowercase.
     invoiceid = models.IntegerField(db_column='InvoiceId')  # Field name made lowercase.
     trackid = models.IntegerField(db_column='TrackId')  # Field name made lowercase.
@@ -92,7 +101,7 @@ class InvoiceItems(models.Model):
         db_table = 'invoice_items'
 
 
-class Invoices(models.Model):
+class Invoice(models.Model):
     invoiceid = models.IntegerField(db_column='InvoiceId')  # Field name made lowercase.
     customerid = models.IntegerField(db_column='CustomerId')  # Field name made lowercase.
     invoicedate = models.DateTimeField(db_column='InvoiceDate')  # Field name made lowercase.
@@ -108,7 +117,7 @@ class Invoices(models.Model):
         db_table = 'invoices'
 
 
-class MediaTypes(models.Model):
+class MediaType(models.Model):
     mediatypeid = models.IntegerField(db_column='MediaTypeId')  # Field name made lowercase.
     name = models.TextField(db_column='Name', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
 
@@ -127,7 +136,7 @@ class PlaylistTrack(models.Model):
         unique_together = (('playlistid', 'trackid'),)
 
 
-class Playlists(models.Model):
+class Playlist(models.Model):
     playlistid = models.IntegerField(db_column='PlaylistId')  # Field name made lowercase.
     name = models.TextField(db_column='Name', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
 
@@ -146,7 +155,7 @@ class SqliteStat1(models.Model):
         db_table = 'sqlite_stat1'
 
 
-class Tracks(models.Model):
+class Track(models.Model):
     trackid = models.IntegerField(db_column='TrackId')  # Field name made lowercase.
     name = models.TextField(db_column='Name')  # Field name made lowercase. This field type is a guess.
     albumid = models.IntegerField(db_column='AlbumId', blank=True, null=True)  # Field name made lowercase.
