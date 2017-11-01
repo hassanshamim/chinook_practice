@@ -15,10 +15,9 @@ class SimpleAlbumSerializer(serializers.ModelSerializer):
 
 class ArtistSerializer(serializers.ModelSerializer):
 
-    albums = SimpleAlbumSerializer(many=True)
+    albums = SimpleAlbumSerializer(many=True, required=False, read_only=True)
 
     class Meta:
         model = models.Artist
         fields = ('id', 'name', 'albums')
-        read_only_fields = ('albums',)
 
