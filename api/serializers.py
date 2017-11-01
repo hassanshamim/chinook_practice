@@ -21,3 +21,21 @@ class ArtistSerializer(serializers.ModelSerializer):
         model = models.Artist
         fields = ('id', 'name', 'albums')
 
+class CustomerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Customer
+        fields = '__all__'
+
+class EmployeeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Employee
+        fields = '__all__'
+
+
+class GenreSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Genre
+        fields = '__all__'
