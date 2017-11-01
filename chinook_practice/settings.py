@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'chinook_practice.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'Chinook_Sqlite.sqlite'),
+        'NAME': os.path.join(BASE_DIR, 'chinook.db'),
     }
 }
 
