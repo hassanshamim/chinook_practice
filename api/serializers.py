@@ -6,3 +6,19 @@ class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Album
         fields = '__all__'
+
+class SimpleAlbumSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Album
+        exclude = ('artist',)
+
+class ArtistSerializer(serializers.ModelSerializer):
+
+    albums = SimpleAlbumSerializer(many=True)
+
+    class Meta:
+        model = models.Artist
+        fields = ('id', 'name', 'albums')
+        read_only_fields = ('albums',)
+
