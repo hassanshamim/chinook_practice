@@ -230,7 +230,7 @@ class Track(models.Model):
         related_name='tracks',
         on_delete=models.CASCADE,
     )
-    genreid = models.ForeignKey(Genre,
+    genre = models.ForeignKey(Genre,
         db_column='GenreId',
         blank=True,
         null=True,
