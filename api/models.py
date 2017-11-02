@@ -182,7 +182,7 @@ class PlaylistTrack(models.Model):
 
 
 class Playlist(models.Model):
-    playlist = models.AutoField(db_column='PlaylistId', primary_key=True)  # Field name made lowercase.
+    id = models.AutoField(db_column='PlaylistId', primary_key=True)  # Field name made lowercase.
     name = models.TextField(db_column='Name', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     tracks = models.ManyToManyField('Track',
         related_name='playlists',
@@ -195,16 +195,6 @@ class Playlist(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class SqliteStat1(models.Model):
-    tbl = models.TextField(blank=True, null=True)  # This field type is a guess.
-    idx = models.TextField(blank=True, null=True)  # This field type is a guess.
-    stat = models.TextField(blank=True, null=True)  # This field type is a guess.
-
-    class Meta:
-        managed = False
-        db_table = 'sqlite_stat1'
 
 
 class Track(models.Model):
