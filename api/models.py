@@ -196,6 +196,11 @@ class Playlist(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def total_duration(self):
+        total_ms = self.tracks.aggregate(total=models.Sum('milliseconds'))['total'] or 0
+        return total_ms
+
 
 class Track(models.Model):
     id = models.AutoField(db_column='TrackId', primary_key=True)  # Field name made lowercase.
